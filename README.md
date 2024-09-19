@@ -41,7 +41,7 @@ Windows 11, WSL2 上のUbuntu<br>
 
 ## インストール方法
 
-`git clone <this>`<br>
+`git clone https://github.com/inco-imai/nora.git`<br>
 `cd nora`<br>
 `mkdir bin`<br>
 `make`<br>
