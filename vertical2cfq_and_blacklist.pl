@@ -92,7 +92,7 @@ while(<>){
     # output a cfq
     printf $CORRECTED ("@%s\n",$name);
     printf $CORRECTED ("%s\n",$bases);
-    printf $CORRECTED ("+\n");
+    printf $CORRECTED ("+\t%s\n",$depths);
     printf $CORRECTED ("%s\n",$qvs);
 
     $name = "";

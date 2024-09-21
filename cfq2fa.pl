@@ -1,21 +1,38 @@
 #!/usr/bin/perl
 use strict;
 
-if(@ARGV != 1){
-  die "USAGE: <this> <in.cfq> > <out.fa>\n";
+if(@ARGV != 2){
+  die "USAGE: <this> <in.cfq> <in.blacklist> > <out.fa>\n";
 }
 
-while(my $name=<>){
+open my $incfq, "<$ARGV[0]" or die "cannot open $ARGV[0]: $!\n";
+open my $inbl, "<$ARGV[1]" or die "cannot open $ARGV[1]: $!\n";
+
+my @blist;
+my $listlen=0;
+while(my $el=<$inbl>){
+  chomp $el;
+  $blist[$listlen] = $el;
+  ++$listlen;
+}
+close $inbl;
+
+while(my $name=<$incfq>){
   chomp $name;
-  my $bases = <>;
+  my $bases = <$incfq>;
   chomp $bases;
-  my $options = <>;
+  my $options = <$incfq>;
   chomp $options;
-  my $mdis = <>;
+  my $mdis = <$incfq>;
   chomp $mdis;
   $name =~ s/^\@//;
   $bases =~ s/-//g;
-  printf(">%s\n",$name);
-  printf("%s\n",$bases);
+  if(grep {$_ eq $name} @blist){
+  }
+  else{
+    printf(">%s\n",$name);
+    printf("%s\n",$bases);
+  }
 }
+close $incfq;
 
